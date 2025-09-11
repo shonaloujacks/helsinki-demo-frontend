@@ -84,13 +84,6 @@ const App = () => {
     }
   }
 
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input value={newNote} onChange={handleNoteChange} />
-      <button type="submit">save</button>
-    </form>
-  )
-
   return (
     <div>
       <h1>Notes</h1>
@@ -106,7 +99,13 @@ const App = () => {
       )}
       {user && (
         <div> 
-          <p>{user.name} logged in </p> {noteForm()} </div> 
+          <p>{user.name} logged in </p> 
+          <Noteform 
+          addNote={addNote}
+          newNote={newNote}
+          handleNoteChange={handleNoteChange}
+          /> 
+          </div> 
         )}
 
       <div>
@@ -123,10 +122,6 @@ const App = () => {
           />
         ))}
       </ul>
-      <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
-        <button type="submit">save</button>
-      </form>
       <Footer />
     </div>
   );
