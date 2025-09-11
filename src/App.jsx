@@ -5,6 +5,7 @@ import noteService from "./services/notes";
 import "./index.css";
 import Footer from "./components/Footer";
 import LoginForm from './components/LoginForm'
+import NoteForm from './components/NoteForm';
 
 const Notification = ({ message }) => {
   if (message === null) {
@@ -73,6 +74,7 @@ const App = () => {
     
    try {
       const user = await loginService.login({ username, password })
+      noteService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
@@ -100,7 +102,7 @@ const App = () => {
       {user && (
         <div> 
           <p>{user.name} logged in </p> 
-          <Noteform 
+          <NoteForm 
           addNote={addNote}
           newNote={newNote}
           handleNoteChange={handleNoteChange}
