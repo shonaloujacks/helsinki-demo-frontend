@@ -6,6 +6,7 @@ import "./index.css";
 import Footer from "./components/Footer";
 import LoginForm from './components/LoginForm'
 import NoteForm from './components/NoteForm';
+import LogoutForm from './components/LogoutForm';
 
 const Notification = ({ message }) => {
   if (message === null) {
@@ -32,7 +33,7 @@ const App = () => {
     };
     getAllNotes();
   }, []);
-  
+
 
    useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
@@ -101,6 +102,14 @@ const App = () => {
     }
   }
 
+  const handleLogout = async () => {
+    
+    window.localStorage.removeItem('loggedNoteappUser')
+    noteService.setToken(null)
+    setUser('')
+    console.log("Logged out user:", user)
+  }
+
   return (
     <div>
       <h1>Notes</h1>
@@ -139,6 +148,9 @@ const App = () => {
           />
         ))}
       </ul>
+      <div>{user && (   
+        <LogoutForm 
+          handleLogout={handleLogout}/>)} </div>
       <Footer />
     </div>
   );
