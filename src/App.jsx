@@ -19,7 +19,6 @@ const Notification = ({ message }) => {
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('') 
@@ -46,22 +45,11 @@ const App = () => {
   }, [])
 
 
-  const addNote = async (event) => {
-    event.preventDefault();
-    const noteObject = {
-      content: newNote,
-      important: Math.random() > 0.5,
-    };
-
+  const addNote = async (noteObject) => {
     const returnedNote = await noteService.create(noteObject);
     setNotes(notes.concat(returnedNote));
-    setNewNote("");
   };
 
-  const handleNoteChange = (event) => {
-    console.log(event.target.value);
-    setNewNote(event.target.value);
-  };
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -112,7 +100,8 @@ const App = () => {
   }
 
    const loginForm = () => (
-    <Togglable buttonLabel="login">
+    <Togglable 
+      buttonLabel="login">
       <LoginForm
         username={username}
         password={password}
@@ -124,11 +113,10 @@ const App = () => {
   )
 
     const noteForm = () => (
-    <Togglable buttonLabel="new note">
+    <Togglable 
+      buttonLabel="new note">
       <NoteForm
-        onSubmit={addNote}
-        value={newNote}
-        handleChange={handleNoteChange}
+        createNote={addNote}
       />
     </Togglable>
   )
