@@ -1,30 +1,36 @@
-const LoginForm = ({handleLogin, username, setUsername, password, setPassword}) => {
-    return (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label>
-          username
+const LoginForm = ({
+   handleSubmit,
+   handleUsernameChange,
+   handlePasswordChange,
+   username,
+   password
+  }) => {
+  return (
+    <div>
+      <h2>Login</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          Username
           <input
-            type="text"
-            autoComplete="username"
             value={username}
-            onChange={({ target }) => setUsername(target.value)}
+            onChange={handleUsernameChange}
+            autoComplete="username"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          password
+        </div>
+        <div>
+          Password
           <input
             type="password"
-            autoComplete="current-password"
             value={password}
-            onChange={({ target }) => setPassword(target.value)}
+            onChange={handlePasswordChange}
+            autoComplete="current-password"
           />
-        </label>
       </div>
-      <button type="submit">login</button>
-    </form>
-  )}
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  )
+}
 
-  export default LoginForm
+export default LoginForm

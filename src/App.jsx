@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import LoginForm from './components/LoginForm'
 import NoteForm from './components/NoteForm';
 import LogoutForm from './components/LogoutForm';
+import Togglable from './components/Togglable';
 
 const Notification = ({ message }) => {
   if (message === null) {
@@ -110,27 +111,38 @@ const App = () => {
     console.log("Logged out user:", user)
   }
 
+   const loginForm = () => (
+    <Togglable buttonLabel="login">
+      <LoginForm
+        username={username}
+        password={password}
+        handleUsernameChange={({ target }) => setUsername(target.value)}
+        handlePasswordChange={({ target }) => setPassword(target.value)}
+        handleSubmit={handleLogin}
+      />
+    </Togglable>
+  )
+
+    const noteForm = () => (
+    <Togglable buttonLabel="new note">
+      <NoteForm
+        onSubmit={addNote}
+        value={newNote}
+        handleChange={handleNoteChange}
+      />
+    </Togglable>
+  )
+
   return (
     <div>
       <h1>Notes</h1>
       <Notification message={errorMessage} />
 
-      {!user && ( 
-      <LoginForm
-        username={username}
-        password={password}
-        handleLogin={handleLogin}
-        setUsername={setUsername}
-        setPassword={setPassword} /> 
-      )}
+      {!user && loginForm()}
       {user && (
         <div> 
           <p>{user.name} logged in </p> 
-          <NoteForm 
-          addNote={addNote}
-          newNote={newNote}
-          handleNoteChange={handleNoteChange}
-          /> 
+          {noteForm()}  
           </div> 
         )}
 
