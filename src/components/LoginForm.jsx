@@ -1,10 +1,16 @@
-const LoginForm = ({
-   handleSubmit,
-   handleUsernameChange,
-   handlePasswordChange,
-   username,
-   password
-  }) => {
+import { useState } from 'react'
+
+const LoginForm = ({ onLogin }) => {
+      const [username, setUsername] = useState('') 
+      const [password, setPassword] = useState('')
+
+      const handleSubmit = async (event) => {
+            event.preventDefault()
+            await onLogin({ username, password})
+            setUsername('')
+            setPassword('')
+      }
+
   return (
     <div>
       <h2>Login</h2>
@@ -14,7 +20,7 @@ const LoginForm = ({
           Username
           <input
             value={username}
-            onChange={handleUsernameChange}
+            onChange={event => setUsername(event.target.value)}
             autoComplete="username"
           />
         </div>
@@ -23,7 +29,7 @@ const LoginForm = ({
           <input
             type="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={event => setPassword(event.target.value)}
             autoComplete="current-password"
           />
       </div>
