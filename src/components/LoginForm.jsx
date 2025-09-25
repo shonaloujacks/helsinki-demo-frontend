@@ -17,16 +17,19 @@ const LoginForm = ({ onLogin }) => {
 
       <form onSubmit={handleSubmit}>
         <div>
-          Username
+          <label htmlFor='username-input'>Username
+          </label>
           <input
+            id='username-input'
             value={username}
             onChange={event => setUsername(event.target.value)}
             autoComplete="username"
           />
         </div>
         <div>
-          Password
+          <label htmlFor='password-input'>Password</label>
           <input
+            id='password-input'
             type="password"
             value={password}
             onChange={event => setPassword(event.target.value)}
