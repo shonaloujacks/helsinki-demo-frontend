@@ -20,8 +20,10 @@ const NoteForm = ({ createNote }) => {
         <label htmlFor='note-input'>Note content:
           <input
             id='note-input'
+            data-testid='note-input'
             value={newNote}
             onChange={event => setNewNote(event.target.value)}
+            placeholder='write note content here'
           />
         </label>
         <button style={{ marginLeft: '10px' }} type="submit">save</button>

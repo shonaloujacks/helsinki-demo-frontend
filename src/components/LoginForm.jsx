@@ -18,23 +18,24 @@ const LoginForm = ({ onLogin }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='username-input'>Username
+            <input
+              id='username-input'
+              value={username}
+              onChange={event => setUsername(event.target.value)}
+              autoComplete="username"
+            />
           </label>
-          <input
-            id='username-input'
-            value={username}
-            onChange={event => setUsername(event.target.value)}
-            autoComplete="username"
-          />
         </div>
         <div>
-          <label htmlFor='password-input'>Password</label>
-          <input
-            id='password-input'
-            type="password"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-            autoComplete="current-password"
-          />
+          <label htmlFor='password-input'>Password
+            <input
+              id='password-input'
+              type="password"
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+              autoComplete="current-password"
+            />
+          </label>
         </div>
         <button type="submit">Login</button>
       </form>
